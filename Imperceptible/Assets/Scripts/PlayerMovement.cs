@@ -1,16 +1,16 @@
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
-
-    public CharacterController controller;
+public class PlayerMovement : MonoBehaviour {
+    public CharacterController Sparrow;
+    public CharacterController Windston;
 
     public float speed = 12f;
     public float gravity = -10f;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    
+
 
     Vector3 velocity;
     bool isGrounded;
@@ -52,8 +52,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float x;
         float z;
         bool jumpPressed = false;
@@ -71,22 +70,26 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
-        {
+        if (isGrounded && velocity.y < 0) {
             velocity.y = -2f;
         }
 
         Vector3 move = cam.transform.right * x + cam.transform.forward * z;
-        move = new Vector3(move.x,0,move.z);
-        controller.Move(move * speed * Time.deltaTime);
+        move = new Vector3(move.x, 0, move.z);
+        if (cam.GetComponent<CamSwap>().Sparrow.Priority == 1) {
+            Sparrow.Move(move * (speed * Time.deltaTime));
+        }
+        else {
+            Windston.Move(move * (speed * Time.deltaTime));
+        }
 
-        if(jumpPressed && isGrounded)
-        {
+        if (jumpPressed && isGrounded) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        Sparrow.Move(velocity * Time.deltaTime);
+        Windston.Move(velocity * Time.deltaTime);
     }
 }
