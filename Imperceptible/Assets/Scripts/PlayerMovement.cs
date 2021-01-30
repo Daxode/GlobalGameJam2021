@@ -1,8 +1,8 @@
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	private CharacterController Sparrow;
-	public CharacterController Windston;
+	private CharacterController controller;
 
 	public float speed      = 12f;
 	public float gravity    = -10f;
@@ -14,12 +14,17 @@ public class PlayerMovement : MonoBehaviour {
 	public float     groundDistance = 0.4f;
 	public LayerMask groundMask;
 
+	private CamSwap camSwap;
+	public CinemachineVirtualCamera camera;
+
 	Vector3 velocity;
 	bool    isGrounded;
 
 	private void Start() {
 		cam = Camera.main;
-		Sparrow = GetComponent<CharacterController>();
+		controller = GetComponent<CharacterController>();
+		camSwap = cam.GetComponent<CamSwap>();
+		name = this.name;
 	}
 
 	// Update is called once per frame
@@ -34,26 +39,31 @@ public class PlayerMovement : MonoBehaviour {
 
 		isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-		if (isGrounded && velocity.y < 0) {
-			velocity.y = -2f;
-		}
+		if (checkForName() && camSwap.Draw.Priority != 2) {
 
-		Vector3 move = cam.transform.right * x + cam.transform.forward * z;
-		move = new Vector3(move.x, 0, move.z);
-		if (cam.GetComponent<CamSwap>().Sparrow.Priority == 1) {
-			Sparrow.Move(move * (speed * Time.deltaTime));
-		}
-		else {
-			Windston.Move(move * (speed * Time.deltaTime));
-		}
+			if (isGrounded && velocity.y < 0) {
+				velocity.y = -2f;
+			}
 
-		if (jumpPressed && isGrounded) {
-			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-		}
+			Vector3 move = cam.transform.right * x + cam.transform.forward * z;
+			move = new Vector3(move.x, 0, move.z);
+			controller.Move(move * (speed * Time.deltaTime));
 
+			if (jumpPressed && isGrounded) {
+				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			}
+		}
 		velocity.y += gravity * Time.deltaTime;
 
-		Sparrow.Move(velocity * Time.deltaTime);
-		Windston.Move(velocity * Time.deltaTime);
+		controller.Move(velocity * Time.deltaTime);
+	}
+
+	bool checkForName() {
+		if (camera.Priority == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
