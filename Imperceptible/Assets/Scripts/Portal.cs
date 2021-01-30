@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class Portal : MonoBehaviour {
+public class Portal : MonoBehaviour, IPortal {
     [Header ("Main Settings")]
     public Portal linkedPortal;
     public MeshRenderer screen;

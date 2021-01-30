@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
 
 public class PortalEnabler : MonoBehaviour {
-	Portal[] portals;
+	IPortal[] portals;
 
 	void Awake() {
-		portals = FindObjectsOfType<Portal>();
+		var portals = new List<IPortal>();
+		var ss      = FindObjectsOfType<MonoBehaviour>().OfType<IPortal>();
+		foreach (IPortal s in ss) {
+			portals.Add (s);
+		}
+		
+		//portals = FindObjectsOfType<IPortal>();
+		this.portals = portals.ToArray();
 	}
 
 	void OnPreCull() {
