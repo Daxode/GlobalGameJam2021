@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UI : MonoBehaviour {
+public class Buttons : MonoBehaviour {
     private Canvas _canvas;
     public SpriteRenderer pencil;
     void Start() {
@@ -18,5 +18,9 @@ public class UI : MonoBehaviour {
             var mpos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             
         }
+    }
+
+    public void GreenButton() {
+        print("test");
     }
 }
