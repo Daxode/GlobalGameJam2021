@@ -1,7 +1,8 @@
+using System.Diagnostics;
 using Cinemachine;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : PortalTraveller{
 	private CharacterController controller;
 
 	public float speed      = 12f;
@@ -65,5 +66,10 @@ public class PlayerMovement : MonoBehaviour {
 		else {
 			return false;
 		}
+	}
+	public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
+		transform.position = pos;
+		velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity));
+		Physics.SyncTransforms ();
 	}
 }
