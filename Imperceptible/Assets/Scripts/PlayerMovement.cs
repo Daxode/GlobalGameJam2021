@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class PlayerMovement : PortalTraveller {
 
     public float walkSpeed = 3;
@@ -21,10 +23,10 @@ public class PlayerMovement : PortalTraveller {
     public float yaw;
     public float pitch;
 
-    public CinemachineVirtualCamera camera;
+    private CinemachineVirtualCamera cameraPlayer;
     public CinemachineVirtualCamera cameradraw;
-    float smoothYaw;
-    float smoothPitch;
+    float                            smoothYaw;
+    float                            smoothPitch;
 
     float yawSmoothV;
     float pitchSmoothV;
@@ -40,6 +42,7 @@ public class PlayerMovement : PortalTraveller {
 
     void Start () {
         cam = Camera.main;
+        cameraPlayer = GetComponentInChildren<CinemachineVirtualCamera>();
         if (lockCursor) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -65,7 +68,7 @@ public class PlayerMovement : PortalTraveller {
             disabled = !disabled;
         }
 
-        if (disabled || camera.Priority == 0 || cameradraw.Priority == 2) {
+        if (disabled || cameraPlayer.Priority == 0 || cameradraw.Priority == 2) {
             verticalVelocity -= gravity * Time.deltaTime;
             velocity = new Vector3 (0, verticalVelocity, 0);
             var flag = controller.Move (velocity * Time.deltaTime);
