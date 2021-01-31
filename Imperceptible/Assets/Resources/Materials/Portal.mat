@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Portal
-  m_Shader: {fileID: 4800000, guid: 6760ee68e8e67c94aaf2e2dea6ab5288, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2fbf0e7ae62349f6b232c0bd87bebc17, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -290,7 +290,7 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - _tintAmount: 0
+    - _tintAmount: 0.22
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
@@ -309,7 +309,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _tintColor: {r: 0.7735849, g: 0.11311854, b: 0.18662183, a: 1}
+    - _tintColor: {r: 0.8113208, g: 0.6467604, b: 0.6656754, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6945509360878129335
 MonoBehaviour:
