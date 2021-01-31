@@ -248,9 +248,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawPanel: {fileID: 8200628526163298219}
   playerPanel: {fileID: 5326581964195986328}
+  sparrowColor: {r: 0.7264151, g: 0.044544343, b: 0.5583502, a: 1}
+  wintonColor: {r: 0.053585246, g: 0.6415094, b: 0.0514418, a: 1}
+  playerRingImage: {fileID: 5092596342574678418}
+  playerNameText: {fileID: 7545534286129490002}
   colorDrawColor: {r: 0, g: 1, b: 0, a: 1}
   brush: {fileID: 2325960555414042029}
-  scalespeed: 3
+  scalespeed: 9.45
 --- !u!1 &2325960554675763056
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5326581964195986328
 RectTransform:
   m_ObjectHideFlags: 0

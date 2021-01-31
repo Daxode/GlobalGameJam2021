@@ -286,58 +286,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: scalespeed
-      value: 9.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: wintonColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: wintonColor.b
-      value: 0.0514418
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: wintonColor.g
-      value: 0.6415094
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: wintonColor.r
-      value: 0.053585246
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: playerNameText
-      value: 
-      objectReference: {fileID: 7389371399202422826}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: sparrowColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: sparrowColor.b
-      value: 0.5583502
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: sparrowColor.g
-      value: 0.044544343
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: sparrowColor.r
-      value: 0.7264151
-      objectReference: {fileID: 0}
-    - target: {fileID: 2325960554574252747, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: playerRingImage
-      value: 
-      objectReference: {fileID: 5230865219030165994}
-    - target: {fileID: 4599831630505913719, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8031091182319153017, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
 --- !u!224 &3349611160937374386 stripped
@@ -354,28 +302,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b21b65e83f3a5498cfb4a959343034, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5230865219030165994 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5092596342574678418, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-  m_PrefabInstance: {fileID: 1025498378892683384}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7389371399202422826 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7545534286129490002, guid: 85764d60df393d14f87d0f5a616b5287, type: 3}
-  m_PrefabInstance: {fileID: 1025498378892683384}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5652438977062748348
