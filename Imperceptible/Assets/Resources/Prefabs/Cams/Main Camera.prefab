@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1679408750034975853}
   - component: {fileID: 1679408750034975850}
   - component: {fileID: 3664853403819702152}
+  - component: {fileID: 1324547732}
+  - component: {fileID: 1324547736}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -66,7 +68,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2239
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -142,7 +144,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679408750034975846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e366bafb9d5662b4480980b99f5b5195, type: 3}
   m_Name: 
@@ -151,3 +153,39 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _buttons: {fileID: 0}
+--- !u!114 &1324547732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679408750034975846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00ea32e87a29284c98dab658c99a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1324547736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679408750034975846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b5d60b406af64b8563ec3df245e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noPlats:
+    serializedVersion: 2
+    m_Bits: 2111
+  fromWinston:
+    serializedVersion: 2
+    m_Bits: 2175
+  fromSparrow:
+    serializedVersion: 2
+    m_Bits: 2239
+  fromPortal:
+    serializedVersion: 2
+    m_Bits: 2751
