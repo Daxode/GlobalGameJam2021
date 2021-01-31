@@ -1,17 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
 public class Mirror : MonoBehaviour, IPortal {
-	[Header("Main Settings")] public MeshRenderer screen;
-	public                           int          recursionLimit = 5;
+	[SerializeField]          private LayerMask    mirrorsOnlyLayer;
+	[Header("Main Settings")] public  MeshRenderer screen;
+	public                            int          recursionLimit = 5;
 
 	// Private variables
 	RenderTexture viewTexture;
 	Camera        portalCam;
 	Camera        playerCam;
 	Material      firstRecursionMat;
+	
 
 	void Awake() {
 		playerCam = Camera.main;
@@ -24,26 +27,30 @@ public class Mirror : MonoBehaviour, IPortal {
 	public void PrePortalRender() { }
 	
 	public void Render() {
+		print("test0");
 		CreateViewTexture();
 
 		//int startIndex = 0;
-		//portalCam.projectionMatrix = playerCam.projectionMatrix;
+		portalCam.projectionMatrix = playerCam.projectionMatrix;
 
 		// Hide screen so that camera can see through mirror
 		screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 		//screen.material.SetInt("displayMask", 0);
-		portalCam.transform.rotation = transform.rotation;
+		print("test1");
+
+		RaycastHit hit;
+		if (!Physics.Raycast(playerCam.transform.position, playerCam.transform.forward,out hit,
+		                     float.MaxValue, mirrorsOnlyLayer)) return;
+		print("test2");
+		
+		float   distance      = Vector3.Distance(playerCam.transform.position, hit.point);
+		var     playerForward = playerCam.transform.forward;
+		Vector3 n             = -screen.transform.right;
+		Vector3 reflect       = playerForward-2*Vector3.Dot(playerForward, n)*n;
+		portalCam.transform.position = playerCam.transform.position + playerCam.transform.forward * distance + reflect*distance;
+		portalCam.transform.LookAt(hit.point, playerCam.transform.up);
 		portalCam.Render();
-
-		/*for (int i = startIndex; i < recursionLimit; i++) {
-			portalCam.transform.rotation = transform.rotation;
-			//SetNearClipPlane ();
-			portalCam.Render();
-
-			if (i == startIndex) {
-				screen.material.SetInt("displayMask", 1);
-			}
-		}*/
+		print("test3");
 
 		// Unhide objects hidden at start of render
 		screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
@@ -61,6 +68,12 @@ public class Mirror : MonoBehaviour, IPortal {
 			portalCam.targetTexture = viewTexture;
 			// Display the view texture on the screen of the linked portal
 			screen.material.SetTexture("_MainTex", viewTexture);
+		}
+	}
+
+	private void OnDrawGizmosSelected() {
+		if (playerCam != null) {
+			Gizmos.DrawRay(playerCam.transform.position, playerCam.transform.forward);
 		}
 	}
 }

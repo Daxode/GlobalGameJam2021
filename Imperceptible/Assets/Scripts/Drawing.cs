@@ -45,7 +45,6 @@ public class Drawing : MonoBehaviour {
     }
 
     void Clear() {
-        print("test");
         tex = new Texture2D(100, 100);
         tex.filterMode = FilterMode.Point;
         
