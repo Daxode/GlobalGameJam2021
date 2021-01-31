@@ -8,19 +8,47 @@ using UnityEngine.Serialization;
 public enum ViewActive {
     WinstonView,
     SparrowView,
-    DrawView
+    DrawSparrowView,
+    DrawWintonView
 }
 
 public class CamSwap : MonoBehaviour {
-    public CinemachineVirtualCamera Sparrow;
-    public CinemachineVirtualCamera Winton;
-    public CinemachineVirtualCamera Draw;
-    public Action<ViewActive>       onViewChange;
+    [SerializeField] private CinemachineVirtualCamera Sparrow;
+    [SerializeField] private CinemachineVirtualCamera Winton;
+    [SerializeField] private CinemachineVirtualCamera Draw;
+    public                   Action<ViewActive>       onViewChange;
+    [SerializeField] private ViewActive               currentView;
     
     void Start() {
-        Sparrow.Priority = 1;
-        Winton.Priority = 0;
-        Draw.Priority = 0;
+        SetWhoActive();
+        onViewChange += active => currentView = active;
+    }
+
+    void SetWhoActive() {
+        switch (currentView) {
+            case ViewActive.DrawSparrowView:
+                Sparrow.Priority = 1;
+                Winton.Priority = 0;
+                Draw.Priority = 2;
+                break;
+            case ViewActive.DrawWintonView:
+                Sparrow.Priority = 0;
+                Winton.Priority = 1;
+                Draw.Priority = 2;
+                break;
+            case ViewActive.SparrowView:
+                Sparrow.Priority = 1;
+                Winton.Priority = 0;
+                Draw.Priority = 0;
+                break;
+            case ViewActive.WinstonView:
+                Sparrow.Priority = 0;
+                Winton.Priority = 1;
+                Draw.Priority = 0;
+                break;
+        }
+
+        onViewChange(currentView);
     }
 
     void Update() {
@@ -47,7 +75,7 @@ public class CamSwap : MonoBehaviour {
             }
             else {
                 Draw.Priority = 2;
-                onViewChange(ViewActive.DrawView);
+                onViewChange(ViewActive.DrawSparrowView);
             }
         }
     }
