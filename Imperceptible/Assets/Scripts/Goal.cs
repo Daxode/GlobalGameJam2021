@@ -12,10 +12,11 @@ public class Goal : MonoBehaviour
     public string scenePath;
     
     void Start() {
-        var boxCol =gameObject.GetComponent<BoxCollider>();
+        var boxCol = gameObject.GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other) {
+        print("I'm colliding");
         if (other.gameObject.CompareTag("Player") && player != null) {
             player = other.gameObject;
             SwapScene();
