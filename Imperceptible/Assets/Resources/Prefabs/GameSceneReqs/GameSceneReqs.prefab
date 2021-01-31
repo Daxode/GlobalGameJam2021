@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: Sparrow
       value: 
       objectReference: {fileID: 8907214735534806088}
+    - target: {fileID: 1679408750034975850, guid: 1986b1dfc27688149b5c2e1ae7a327be, type: 3}
+      propertyPath: currentView
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1679408750034975851, guid: 1986b1dfc27688149b5c2e1ae7a327be, type: 3}
       propertyPath: m_RootOrder
       value: 0
