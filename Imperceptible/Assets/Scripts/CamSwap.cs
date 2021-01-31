@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum ViewActive {
     WinstonView,
@@ -55,8 +52,13 @@ public class CamSwap : MonoBehaviour {
         return currentView;
     }
 
+    public bool IsDrawViewActive() {
+        return currentView == ViewActive.DrawSparrowView || currentView == ViewActive.DrawWintonView;
+    }
+
     void Update() {
-        if (Input.GetKeyUp(KeyCode.E) && Draw.Priority != 2) {
+        if ((Input.GetKeyUp(KeyCode.Q)||Input.GetKeyUp(KeyCode.Tab))) {
+            Draw.Priority = 0;
             if (Sparrow.Priority == 1) {
                 Sparrow.Priority = 0;
                 Winton.Priority = 1;
@@ -68,7 +70,7 @@ public class CamSwap : MonoBehaviour {
                 onViewChange(ViewActive.SparrowView);
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Q)) {
+        else if (Input.GetKeyUp(KeyCode.E)||Input.GetKeyUp(KeyCode.M)||Input.GetKeyUp(KeyCode.I)) {
             if (Draw.Priority == 2) {
                 if (Sparrow.Priority == 1)
                     onViewChange(ViewActive.SparrowView);

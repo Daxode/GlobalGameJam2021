@@ -1,22 +1,20 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Drawing : MonoBehaviour {
-    private Camera cam;
-    public LayerMask mask;
-    public Buttons _buttons;
-    private Texture2D tex;
-    private List<Renderer> renders = new List<Renderer>(); 
-
+    private Camera         cam;
+    public  LayerMask      mask;
+    public  Buttons        _buttons;
+    private List<Renderer> renders = new List<Renderer>();
+    private CamSwap        _camSwap;
     void Start() {
+        _camSwap = FindObjectOfType<CamSwap>();
         cam = GetComponent<Camera>();
         var drawArray = GameObject.FindGameObjectsWithTag("DrawTag");
         foreach (var drawtag in drawArray) {
-            renders.Add(drawtag.GetComponent<Renderer>());
+            var rend = drawtag.GetComponent<Renderer>();
+            renders.Add(rend);
+            rend.material.color = Color.white;
         }
         _buttons.clearEvent += () => Clear();
         Clear();
@@ -24,7 +22,7 @@ public class Drawing : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!Input.GetMouseButton(0)) {
+        if (!Input.GetMouseButton(0) || !_camSwap.IsDrawViewActive()) {
             return;
         }
 
@@ -36,7 +34,8 @@ public class Drawing : MonoBehaviour {
         if (rend == null || rend.sharedMaterial == null) {
             return;
         }
-        rend.material.mainTexture = tex;
+        
+        var     tex     = rend.material.mainTexture as Texture2D;
         Vector2 pixelUV = hit.textureCoord;
         pixelUV.x *= tex.width;
         pixelUV.y *= tex.height;
@@ -45,17 +44,18 @@ public class Drawing : MonoBehaviour {
     }
 
     void Clear() {
-        tex = new Texture2D(100, 100);
-        tex.filterMode = FilterMode.Point;
-        
-        var pixels = tex.GetPixels();
-        for (int i = 0; i < pixels.Length; i++) {
-            pixels[i] = Color.clear;
-        }
-        tex.SetPixels(pixels);
-        tex.Apply();
-        
         foreach (var rend in renders) {
+            int size = (int)(rend.transform.lossyScale.magnitude * 25f);
+            var tex = new Texture2D(size, size);
+            tex.filterMode = FilterMode.Point;
+        
+            var pixels = tex.GetPixels();
+            for (int i = 0; i < pixels.Length; i++) {
+                pixels[i] = Color.clear;
+            }
+            tex.SetPixels(pixels);
+            tex.Apply();
+            
             rend.material.mainTexture = tex;
         }
     }

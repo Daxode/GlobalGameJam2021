@@ -1,22 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
-    public bool BothPlayers;
-    private BoxCollider boxCol;
-    private GameObject player;
-    public string scenePath;
-    
-    void Start() {
-        var boxCol = gameObject.GetComponent<BoxCollider>();
+    public  bool        BothPlayers;
+    private GameObject  player;
+    public  string      scenePath;
+    public  bool        winState = false;
+    private Buttons     _buttons;
+    private void Start() {
+        _buttons = FindObjectOfType<Buttons>();
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("I'm colliding");
         if (other.gameObject.CompareTag("Player") && player != null) {
             player = other.gameObject;
             SwapScene();
@@ -37,6 +33,9 @@ public class Goal : MonoBehaviour
     }
 
     void SwapScene() {
-        SceneManager.LoadScene(scenePath);
+        if (!winState) SceneManager.LoadScene(scenePath);
+        else {
+            _buttons.OnWin();
+        }
     }
 }

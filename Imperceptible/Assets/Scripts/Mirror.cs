@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -28,6 +25,11 @@ public class Mirror : MonoBehaviour, IPortal {
 	public void PrePortalRender() { }
 	
 	public void Render() {
+		// Skip rendering the view from this portal if player is not looking at the linked portal
+		if (!CameraUtility.VisibleFromCamera (screen, playerCam)) {
+			return;
+		}
+		
 		CreateViewTexture();
 
 		//int startIndex = 0;

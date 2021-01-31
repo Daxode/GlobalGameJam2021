@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Cinemachine;
 using Image = UnityEngine.UI.Image;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +9,7 @@ using Cursor = UnityEngine.Cursor;
 public class Buttons : MonoBehaviour {
     [SerializeField] private RectTransform drawPanel;
     [SerializeField] private RectTransform playerPanel;
+    [SerializeField] private RectTransform winPanel;
 
     [Header("Player Panel")]
     [SerializeField] private Color sparrowColor;
@@ -99,6 +99,12 @@ public class Buttons : MonoBehaviour {
             playerNameText.text = goTowardPlayerName.Substring(0, i+1);
             yield return new WaitForSeconds(.1f);
         }
+    }
+
+    public void OnWin() {
+        drawPanel.gameObject.SetActive(false);
+        playerPanel.gameObject.SetActive(false);
+        winPanel.gameObject.SetActive(true);
     }
 
     public void GiveColorButton(Color color) {
