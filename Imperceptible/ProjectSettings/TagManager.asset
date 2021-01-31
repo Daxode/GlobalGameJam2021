@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DrawTag
+  - PortalTag
   layers:
   - Default
   - TransparentFX

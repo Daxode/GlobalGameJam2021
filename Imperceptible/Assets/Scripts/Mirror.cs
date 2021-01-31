@@ -26,8 +26,8 @@ public class Mirror : MonoBehaviour, IPortal {
 	public void Render() {
 		CreateViewTexture();
 
-		int startIndex = 0;
-		portalCam.projectionMatrix = playerCam.projectionMatrix;
+		//int startIndex = 0;
+		//portalCam.projectionMatrix = playerCam.projectionMatrix;
 
 		// Hide screen so that camera can see through mirror
 		screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
