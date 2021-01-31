@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: CM Sparrow
-    m_To: CM Windston
+    m_To: CM Winton
     m_Blend:
       m_Style: 1
       m_Time: 0.5
@@ -24,7 +24,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CM Windston
+  - m_From: CM Winton
     m_To: CM Sparrow
     m_Blend:
       m_Style: 1
