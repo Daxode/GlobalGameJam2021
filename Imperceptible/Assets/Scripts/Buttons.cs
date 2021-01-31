@@ -38,7 +38,6 @@ public class Buttons : MonoBehaviour {
     }
 
     private void ONViewChange(ViewActive viewActive) {
-        print("reee");
         switch (viewActive) {
             case ViewActive.DrawSparrowView:
             case ViewActive.DrawWintonView:
@@ -72,7 +71,6 @@ public class Buttons : MonoBehaviour {
     void Update() {
         if (_camSwap.GetCurrentView() == ViewActive.DrawSparrowView ||
             _camSwap.GetCurrentView() == ViewActive.DrawWintonView) {
-            print("uwuuwuwuw");
             brush.position = Input.mousePosition;
             img.color = getColor();
             img.color = new Color(img.color.r, img.color.g, img.color.b);
