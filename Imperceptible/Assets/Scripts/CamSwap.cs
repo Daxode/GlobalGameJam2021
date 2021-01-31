@@ -51,6 +51,10 @@ public class CamSwap : MonoBehaviour {
         onViewChange(currentView);
     }
 
+    public ViewActive GetCurrentView() {
+        return currentView;
+    }
+
     void Update() {
         if (Input.GetKeyUp(KeyCode.E) && Draw.Priority != 2) {
             if (Sparrow.Priority == 1) {

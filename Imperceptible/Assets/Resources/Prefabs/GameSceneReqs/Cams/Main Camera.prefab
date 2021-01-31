@@ -137,6 +137,7 @@ MonoBehaviour:
   Sparrow: {fileID: 0}
   Winton: {fileID: 0}
   Draw: {fileID: 0}
+  currentView: 1
 --- !u!114 &3664853403819702152
 MonoBehaviour:
   m_ObjectHideFlags: 0
