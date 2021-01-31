@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerMovement : PortalTraveller {
@@ -66,6 +67,11 @@ public class PlayerMovement : PortalTraveller {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             disabled = !disabled;
+        }
+
+        if (gameObject.transform.position.y < -5) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
         }
 
         if (disabled || cameraPlayer.Priority == 0 || cameradraw.Priority == 2) {
