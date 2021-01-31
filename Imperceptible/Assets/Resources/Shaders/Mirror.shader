@@ -34,7 +34,7 @@ Shader "Custom/Mirror"
             };
 
             sampler2D _MainTex;
-            //float4 _MainTex_ST;
+            float4 _MainTex_ST;
             float4 _InactiveColour;
             float4 _tintColor;
             float _tintAmount;
@@ -45,14 +45,14 @@ Shader "Custom/Mirror"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv; //TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, float2(1-i.uv.x, i.uv.y));
                 col = col * displayMask + _InactiveColour * (1-displayMask);
                 return (col*(1-_tintAmount))+(_tintColor*_tintAmount);
             }
