@@ -1,26 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class Buttons : MonoBehaviour {
+    private Color color = Color.green;
     private Canvas _canvas;
-    public SpriteRenderer pencil;
+    public CinemachineVirtualCamera cam;
+    public Action clearEvent;
     void Start() {
-        _canvas = this.GetComponent<Canvas>();
+        _canvas = GetComponent<Canvas>();
+        _canvas.enabled = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonUp(0)) {
-            var mpos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            
+    void Update() {
+        if(cam.Priority == 2) {
+            _canvas.enabled = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else {
+            _canvas.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
     public void GreenButton() {
-        print("test");
+        color = Color.green;
+    }
+
+    public void PurpleButton() {
+        color = Color.magenta;
+    }
+
+    public void BlueButton() {
+        color = Color.blue;
+    }
+
+    public void EraserButton() {
+        color = Color.clear;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void Clear() {
+        clearEvent();
     }
 }
