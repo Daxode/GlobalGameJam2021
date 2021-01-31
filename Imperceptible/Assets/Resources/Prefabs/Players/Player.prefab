@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eebbac61208b4f4aa8d5828748813fb, type: 2}
+  - {fileID: 2100000, guid: 12982745be8cbfc4795230d07296e2e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,7 +172,6 @@ MonoBehaviour:
   rotationSmoothTime: 0.1
   yaw: 0
   pitch: 0
-  camera: {fileID: 8154282333097531302}
   cameradraw: {fileID: 0}
 --- !u!1001 &631127886
 PrefabInstance:
@@ -188,6 +187,10 @@ PrefabInstance:
     - target: {fileID: 8154282332503386344, guid: 364969a70df3c834b9df2051ad59fdcf, type: 3}
       propertyPath: m_Follow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154282332503386344, guid: 364969a70df3c834b9df2051ad59fdcf, type: 3}
+      propertyPath: m_Priority
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8154282332503386345, guid: 364969a70df3c834b9df2051ad59fdcf, type: 3}
       propertyPath: m_RootOrder
@@ -242,14 +245,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8154282332503386345, guid: 364969a70df3c834b9df2051ad59fdcf, type: 3}
   m_PrefabInstance: {fileID: 631127886}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8154282333097531302 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8154282332503386344, guid: 364969a70df3c834b9df2051ad59fdcf, type: 3}
-  m_PrefabInstance: {fileID: 631127886}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

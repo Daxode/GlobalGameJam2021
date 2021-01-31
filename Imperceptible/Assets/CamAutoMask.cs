@@ -7,6 +7,7 @@ public class CamAutoMask : MonoBehaviour {
     [Header("Culling Masks")]
     [SerializeField] private LayerMask noPlats;
     [SerializeField] private LayerMask fromWinston;
+    [SerializeField] private LayerMask fromSparrow;
     [SerializeField] private LayerMask fromPortal;
     
     private Camera[] allPortalCameras;
@@ -27,7 +28,7 @@ public class CamAutoMask : MonoBehaviour {
         _camSwap.onViewChange += (viewActive) => {
             switch (viewActive) {
                 case ViewActive.SparrowView:
-                    thisCam.cullingMask = noPlats;
+                    thisCam.cullingMask = fromSparrow;
                     allPortalCameraList.ForEach((camera => camera.cullingMask = fromPortal));
                     break;
                 case ViewActive.WinstonView:
