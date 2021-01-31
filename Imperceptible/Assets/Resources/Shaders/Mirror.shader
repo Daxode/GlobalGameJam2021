@@ -48,8 +48,8 @@ Shader "Custom/Mirror"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.screenPos.xy / i.screenPos.w;
-                fixed4 portalCol = tex2D(_MainTex, float2(1-uv.x, uv.y));
-                float4 col = portalCol * displayMask + _InactiveColour * (1-displayMask);
+                fixed4 col = tex2D(_MainTex, uv*displayMask+(1-displayMask)*float2(1-uv.x, uv.y));
+                //float4 col = portalCol * displayMask + _InactiveColour * (1-displayMask);
                 return (col*(1-_tintAmount))+(_tintColor*_tintAmount);
             }
             ENDCG

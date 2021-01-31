@@ -5,7 +5,6 @@ using DefaultNamespace;
 using UnityEngine;
 
 public class Mirror : MonoBehaviour, IPortal {
-	[SerializeField]          private LayerMask    mirrorsOnlyLayer;
 	[Header("Main Settings")] public  MeshRenderer screen;
 	public                            int          recursionLimit = 5;
 
@@ -14,20 +13,21 @@ public class Mirror : MonoBehaviour, IPortal {
 	Camera        portalCam;
 	Camera        playerCam;
 	Material      firstRecursionMat;
-	
+
+	private Plane _plane;
 
 	void Awake() {
 		playerCam = Camera.main;
 		portalCam = GetComponentInChildren<Camera>();
 		portalCam.enabled = false;
-		screen.material.SetInt("displayMask", 1);
+		screen.material.SetInt("displayMask", 0);
+		_plane = new Plane(screen.transform.forward, screen.transform.position);
 	}
 
 	// Called before any mirror cameras are rendered for the current frame
 	public void PrePortalRender() { }
 	
 	public void Render() {
-		print("test0");
 		CreateViewTexture();
 
 		//int startIndex = 0;
@@ -35,22 +35,35 @@ public class Mirror : MonoBehaviour, IPortal {
 
 		// Hide screen so that camera can see through mirror
 		screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-		//screen.material.SetInt("displayMask", 0);
-		print("test1");
-
-		RaycastHit hit;
-		if (!Physics.Raycast(playerCam.transform.position, playerCam.transform.forward,out hit,
-		                     float.MaxValue, mirrorsOnlyLayer)) return;
-		print("test2");
+		var   playerForward = playerCam.transform.forward;
+		float enter         = 0.0f;
+		var   ray           = new Ray(playerCam.transform.position, playerForward);
+		if (!_plane.Raycast(ray, out enter)) {
+			ray = new Ray(playerCam.transform.position, playerCam.transform.right);
+			if (!_plane.Raycast(ray, out enter)) {
+				ray = new Ray(playerCam.transform.position, -playerCam.transform.right);
+				if (!_plane.Raycast(ray, out enter)) {
+					return;
+				}
+			}
+		}
+		Vector3 hitPoint = ray.GetPoint(enter);
 		
-		float   distance      = Vector3.Distance(playerCam.transform.position, hit.point);
-		var     playerForward = playerCam.transform.forward;
+		float   distance      = Vector3.Distance(playerCam.transform.position, hitPoint);
 		Vector3 n             = -screen.transform.right;
-		Vector3 reflect       = playerForward-2*Vector3.Dot(playerForward, n)*n;
-		portalCam.transform.position = playerCam.transform.position + playerCam.transform.forward * distance + reflect*distance;
-		portalCam.transform.LookAt(hit.point, playerCam.transform.up);
+		Vector3 reflect       = ray.direction-2*Vector3.Dot(ray.direction, n)*n;
+		portalCam.transform.position = playerCam.transform.position + ray.direction * distance + reflect*distance;
+		
+		//var lookatdir = playerCam.transform.forward + playerCam.transform.right;
+		portalCam.transform.rotation = Quaternion.LookRotation(-reflect, playerCam.transform.up);
+		
+		if (ray.direction == playerCam.transform.right) {
+			portalCam.transform.Rotate(portalCam.transform.up, 90);
+		} else if (ray.direction == -playerCam.transform.right) {
+			portalCam.transform.Rotate(portalCam.transform.up, -90);
+		}
+		
 		portalCam.Render();
-		print("test3");
 
 		// Unhide objects hidden at start of render
 		screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
